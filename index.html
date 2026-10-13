@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude Code Quest</title>
+  <meta name="description" content="A cute, game-style course that teaches kids and beginners how to code with Claude Code.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div id="heroMascot"></div>
+      <h1>Welcome to <span class="accent">Claude Code Quest</span>!</h1>
+      <p>Nine tiny games teach you how to build apps with Claude Code, an AI helper that can read code, write code and run commands with you. Collect up to 3 stars per level!</p>
+      <div class="btn-row">
+        <a class="btn" id="startBtn" href="levels/level1-meet-claude.html">Start adventure 🚀</a>
+        <a class="btn sky" href="challenges.html">Challenges 🏆</a>
+      </div>
+    </section>
+
+    <section class="map" id="map" aria-label="Level map"></section>
+
+    <section class="panel tip">
+      <h3>👩‍🏫 For parents and teachers</h3>
+      <p>Each level has a short story (learn) followed by a mini game (practice). Progress is saved in this browser only. Facts in the course follow the official Claude Code docs at <a href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>. Using Claude Code for real needs a paid Claude plan or a Claude Console account, so younger learners should practise with a grown-up.</p>
+      <div class="btn-row">
+        <button class="btn ghost" id="unlockAll">Unlock all levels</button>
+        <button class="btn ghost" id="reset">Reset my stars</button>
+      </div>
+    </section>
+  </main>
+  <footer>Made with 🧡 for curious coders. Claude Code Quest is a fan-made learning course.</footer>
+
+  <script src="js/game.js"></script>
+  <script>
+    (function () {
+      var C = window.CCQ;
+      C.topbar("");
+      document.getElementById("heroMascot").innerHTML = C.MASCOT.replace("<svg", '<svg class="mascot"');
+      var p = C.load(), map = document.getElementById("map");
+      C.LEVELS.forEach(function (l, i) {
+        var s = p[l.id] || 0, open = C.isUnlocked(i);
+        var card = C.el(open ? "a" : "div", { class: "level-card" + (open ? "" : " locked"), href: open ? "levels/" + l.file : null }, [
+          C.el("div", { class: "badge " + l.color, text: l.emoji }),
+          C.el("div", { class: "num", text: "Level " + (i + 1) }),
+          C.el("h3", { text: l.title }),
+          C.el("p", { text: l.blurb }),
+          C.el("div", { class: "stars", text: "★★★".slice(0, s) + "☆☆☆".slice(0, 3 - s) })
+        ]);
+        if (!open) card.removeAttribute("href");
+        map.appendChild(card);
+      });
+      var firstOpen = C.LEVELS.filter(function (l) { return !p[l.id]; })[0];
+      if (firstOpen && C.totalStars() > 0) {
+        var b = document.getElementById("startBtn");
+        b.href = "levels/" + firstOpen.file; b.textContent = "Continue adventure 🚀";
+      }
+      document.getElementById("unlockAll").onclick = function () { var q = C.load(); q.unlockAll = true; C.save(q); location.reload(); };
+      document.getElementById("reset").onclick = function () { if (confirm("Reset all stars?")) { C.save({}); location.reload(); } };
+    })();
+  </script>
+</body>
+</html>
