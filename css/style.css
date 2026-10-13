@@ -1,0 +1,322 @@
+/* Claude Code Quest - shared styles */
+:root {
+  --bg: #fff8f0;
+  --bg-dots: #ffe9d6;
+  --card: #ffffff;
+  --ink: #3d2c4e;
+  --ink-soft: #7a6a8a;
+  --peach: #ff9a76;
+  --peach-dark: #e8734f;
+  --pink: #ffb7c9;
+  --mint: #a8e6cf;
+  --mint-dark: #56c596;
+  --sky: #a0d8f1;
+  --lemon: #ffe48a;
+  --lilac: #cdb4ff;
+  --red: #ff6b81;
+  --shadow: 0 6px 0 rgba(61, 44, 78, 0.12);
+  --radius: 22px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: "Nunito", system-ui, sans-serif;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--bg-dots) 2px, transparent 2px);
+  background-size: 26px 26px;
+  min-height: 100vh;
+  line-height: 1.55;
+}
+
+h1, h2, h3, .title-font {
+  font-family: "Fredoka", "Nunito", sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 0.4em;
+}
+
+a { color: var(--peach-dark); }
+
+.wrap { max-width: 980px; margin: 0 auto; padding: 16px; }
+
+/* ---------- top bar ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: "Fredoka", sans-serif; font-size: 1.35rem; font-weight: 600;
+  text-decoration: none; color: var(--ink);
+}
+.logo svg { width: 42px; height: 42px; }
+.star-count {
+  background: var(--lemon);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-weight: 800;
+  box-shadow: var(--shadow);
+}
+
+/* ---------- hero ---------- */
+.hero {
+  text-align: center;
+  padding: 24px 16px 8px;
+}
+.hero h1 { font-size: clamp(2rem, 6vw, 3.4rem); }
+.hero h1 .accent { color: var(--peach-dark); }
+.hero p { font-size: 1.15rem; color: var(--ink-soft); max-width: 640px; margin: 0 auto 16px; }
+.mascot { width: 140px; height: 140px; animation: bob 3s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
+
+/* ---------- level map ---------- */
+.map {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  margin: 24px 0;
+}
+.level-card {
+  position: relative;
+  display: block;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-decoration: none;
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  box-shadow: var(--shadow);
+  transition: transform .15s ease;
+}
+.level-card:hover { transform: translateY(-4px) rotate(-0.5deg); }
+.level-card .badge {
+  display: inline-grid; place-items: center;
+  width: 54px; height: 54px; border-radius: 50%;
+  font-size: 1.7rem; margin-bottom: 8px;
+  border: 3px solid var(--ink);
+}
+.level-card h3 { font-size: 1.3rem; }
+.level-card p { margin: 0 0 10px; color: var(--ink-soft); }
+.level-card .num { font-weight: 800; font-size: .85rem; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .06em; }
+.level-card .stars { font-size: 1.3rem; letter-spacing: 2px; }
+.level-card.locked { opacity: .55; filter: grayscale(.6); }
+.level-card.locked::after {
+  content: "🔒"; position: absolute; top: 14px; right: 16px; font-size: 1.5rem;
+}
+
+.c-peach { background: var(--peach); }
+.c-pink { background: var(--pink); }
+.c-mint { background: var(--mint); }
+.c-sky { background: var(--sky); }
+.c-lemon { background: var(--lemon); }
+.c-lilac { background: var(--lilac); }
+
+/* ---------- panels ---------- */
+.panel {
+  background: var(--card);
+  border: 3px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px;
+  margin: 18px 0;
+}
+.panel.tip { background: #fff4c7; }
+.speech {
+  display: flex; gap: 14px; align-items: flex-start;
+}
+.speech svg { flex: 0 0 64px; width: 64px; height: 64px; }
+.speech .bubble {
+  background: var(--card); border: 3px solid var(--ink); border-radius: 18px;
+  padding: 12px 16px; position: relative; flex: 1;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-block;
+  font: 700 1.05rem "Fredoka", sans-serif;
+  background: var(--peach);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  padding: 10px 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--ink);
+  text-decoration: none;
+  transition: transform .08s ease, box-shadow .08s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+.btn.mint { background: var(--mint); }
+.btn.sky { background: var(--sky); }
+.btn.ghost { background: var(--card); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 16px; }
+
+/* ---------- learn cards (story slides) ---------- */
+.story { min-height: 220px; }
+.story h2 { font-size: 1.6rem; }
+.story .emoji-big { font-size: 3rem; }
+.dots { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+.dots span { width: 12px; height: 12px; border-radius: 50%; background: var(--bg-dots); border: 2px solid var(--ink); }
+.dots span.on { background: var(--peach); }
+
+code, .mono {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  background: #f3ecff; border-radius: 8px; padding: 2px 6px; font-size: .92em;
+}
+pre.code {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  background: #2b2140; color: #ffe9d6; border-radius: 14px; padding: 14px;
+  overflow-x: auto; font-size: .9rem;
+}
+
+/* ---------- quiz ---------- */
+.progress-bar {
+  height: 18px; background: var(--bg-dots); border: 3px solid var(--ink);
+  border-radius: 999px; overflow: hidden; margin-bottom: 14px;
+}
+.progress-bar > div { height: 100%; width: 0; background: var(--mint-dark); transition: width .3s ease; }
+.hearts { font-size: 1.4rem; letter-spacing: 3px; }
+.quiz-q { font-size: 1.3rem; font-family: "Fredoka", sans-serif; margin: 6px 0 14px; }
+.choices { display: grid; gap: 12px; }
+.choice {
+  text-align: left; font: 600 1.02rem "Nunito", sans-serif; color: var(--ink);
+  background: var(--card); border: 3px solid var(--ink); border-radius: 16px;
+  padding: 12px 16px; cursor: pointer; box-shadow: 0 4px 0 var(--ink);
+}
+.choice:hover { background: #fff1e8; }
+.choice.right { background: var(--mint); }
+.choice.wrong { background: var(--pink); animation: shake .35s; }
+.choice:disabled { cursor: default; }
+@keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.feedback { margin-top: 14px; padding: 12px 16px; border-radius: 14px; font-weight: 700; display: none; }
+.feedback.show { display: block; }
+.feedback.good { background: #e3f9ee; }
+.feedback.bad { background: #ffe6ec; }
+
+/* ---------- matching game ---------- */
+.match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.match-col { display: grid; gap: 10px; align-content: start; }
+.tile {
+  font: 700 .98rem "Nunito", sans-serif; color: var(--ink);
+  background: var(--card); border: 3px solid var(--ink); border-radius: 14px;
+  padding: 10px 12px; cursor: pointer; box-shadow: 0 3px 0 var(--ink); text-align: left;
+}
+.tile.sel { background: var(--lemon); }
+.tile.done { background: var(--mint); opacity: .7; cursor: default; }
+.tile.oops, .chip.oops { background: var(--pink); animation: shake .35s; }
+
+/* ---------- memory game ---------- */
+.memory { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.mcard {
+  aspect-ratio: 3/4; perspective: 600px; cursor: pointer; border: 0; background: none; padding: 0;
+}
+.mcard .inner {
+  position: relative; width: 100%; height: 100%;
+  transition: transform .45s; transform-style: preserve-3d;
+}
+.mcard.flip .inner, .mcard.matched .inner { transform: rotateY(180deg); }
+.mcard .face {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  border: 3px solid var(--ink); border-radius: 14px;
+  display: grid; place-items: center; padding: 6px; text-align: center;
+  font: 700 .82rem "Nunito", sans-serif; color: var(--ink);
+}
+.mcard .front { background: var(--lilac); font-size: 2rem; }
+.mcard .back { background: var(--card); transform: rotateY(180deg); }
+.mcard.matched .back { background: var(--mint); }
+
+/* ---------- terminal game ---------- */
+.terminal {
+  background: #2b2140; color: #ffe9d6; border-radius: 18px; border: 3px solid var(--ink);
+  font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .92rem;
+  padding: 14px; min-height: 260px; box-shadow: var(--shadow);
+}
+.terminal .bar { display: flex; gap: 6px; margin-bottom: 10px; }
+.terminal .bar i { width: 12px; height: 12px; border-radius: 50%; display: block; }
+.terminal .log { white-space: pre-wrap; word-break: break-word; }
+.terminal .log .ok { color: #a8e6cf; }
+.terminal .log .err { color: #ff9bb0; }
+.terminal .log .hint { color: #ffe48a; }
+.terminal .log .claude { color: #ffb38a; }
+.terminal form { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
+.terminal input {
+  flex: 1; background: transparent; border: 0; border-bottom: 2px dashed #7a6a8a;
+  color: #fff; font: inherit; padding: 4px; outline: none; min-width: 0;
+}
+.mission { font-weight: 800; }
+
+/* ---------- sort game ---------- */
+.bins { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 12px; }
+.bin {
+  border: 3px dashed var(--ink); border-radius: 18px; padding: 10px; min-height: 110px; background: #fffdf9;
+}
+.bin h4 { margin: 0 0 6px; font-family: "Fredoka", sans-serif; text-align: center; }
+.bin .chip { display: block; margin: 4px 0; }
+.chip {
+  display: inline-block; font: 700 .9rem "Nunito", sans-serif;
+  background: var(--sky); border: 3px solid var(--ink); border-radius: 999px;
+  padding: 6px 12px; cursor: pointer; color: var(--ink);
+}
+.chip.sel { background: var(--lemon); }
+.chip.good { background: var(--mint); }
+.pool { display: flex; flex-wrap: wrap; gap: 8px; min-height: 40px; }
+
+/* ---------- prompt builder ---------- */
+.builder-slot {
+  min-height: 70px; border: 3px dashed var(--ink); border-radius: 16px; padding: 10px;
+  background: #fffdf9; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+}
+
+/* ---------- win overlay ---------- */
+.overlay {
+  position: fixed; inset: 0; background: rgba(61,44,78,.55);
+  display: none; place-items: center; z-index: 50; padding: 16px;
+}
+.overlay.show { display: grid; }
+.win-box {
+  background: var(--card); border: 4px solid var(--ink); border-radius: 28px;
+  padding: 28px; text-align: center; max-width: 420px; width: 100%;
+  animation: pop .4s cubic-bezier(.2,1.6,.4,1);
+}
+.win-box .big-stars { font-size: 2.6rem; letter-spacing: 6px; }
+@keyframes pop { from { transform: scale(.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.confetti { position: fixed; top: -20px; width: 10px; height: 14px; z-index: 60; pointer-events: none; animation: fall linear forwards; }
+@keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+
+/* ---------- cert ---------- */
+.cert {
+  border: 6px double var(--peach-dark); border-radius: 26px; background: #fffdf6;
+  text-align: center; padding: 30px 18px;
+}
+.cert input {
+  font: 600 1.4rem "Fredoka", sans-serif; text-align: center; border: 0;
+  border-bottom: 3px dashed var(--ink); background: transparent; color: var(--ink);
+  width: min(320px, 100%); padding: 4px;
+}
+
+/* ---------- challenges ---------- */
+.challenge { display: grid; grid-template-columns: 56px 1fr; gap: 14px; align-items: start; }
+.challenge .icon { font-size: 2.2rem; text-align: center; }
+.tag { display: inline-block; font-size: .78rem; font-weight: 800; border-radius: 999px; padding: 2px 10px; border: 2px solid var(--ink); margin-right: 6px; }
+.challenge label { display: flex; gap: 8px; align-items: center; font-weight: 700; margin-top: 8px; cursor: pointer; }
+.challenge input[type=checkbox] { width: 22px; height: 22px; accent-color: var(--mint-dark); }
+
+footer { text-align: center; color: var(--ink-soft); font-size: .9rem; padding: 26px 16px 40px; }
+
+@media (max-width: 560px) {
+  .memory { grid-template-columns: repeat(3, 1fr); }
+  .match-grid { grid-template-columns: 1fr; }
+  .panel { padding: 16px; }
+}
+
+/* sorted chips are decoration only, so clicks fall through to their bin */
+.bin .chip { pointer-events: none; }
